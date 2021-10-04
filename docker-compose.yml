@@ -1,0 +1,36 @@
+version: "3.8"
+   
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  web:
+    build: ./app
+    environment:
+      - DEBUG=True
+      - ALLOWED_HOSTS=*
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/postgres
+
+      - SECRET_KEY="m#t7gx#ho3#ccj7(oo^09u5q(%r&nlcn^0e66ar_iisgn_%o*0"
+      - DJANGO_SETTINGS_MODULE=app.settings
+      - DJANGO_SUPERUSER_PASSWORD=password
+      - DJANGO_SUPERUSER_USERNAME=admin
+      - DJANGO_SUPERUSER_EMAIL=admin@example.com
+    command: 
+      - /bin/bash
+      - -c
+      - |
+       python manage.py collectstatic --noinput
+       python manage.py migrate
+       python manage.py createsuperuser --noinput
+       python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./app:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
