@@ -1,4 +1,4 @@
-FROM python:3.7.6
+FROM python:3.11.4
 RUN apt -y update -y && apt -y upgrade && apt -y install wget
 WORKDIR /
 ENV PYTHONUNBUFFERED=1
