@@ -20,6 +20,8 @@ services:
       - DJANGO_SUPERUSER_PASSWORD=password
       - DJANGO_SUPERUSER_USERNAME=admin
       - DJANGO_SUPERUSER_EMAIL=admin@example.com
+
+      - SENTRY_DSN=empty
     command: 
       - /bin/bash
       - -c
