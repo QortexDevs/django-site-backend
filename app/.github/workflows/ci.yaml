@@ -1,0 +1,46 @@
+name: ci
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build the image
+        run: docker-compose build
+
+      - name: Run tests
+        run: |
+          docker-compose run web pytest
+
+      - name: Run tests
+        run: |
+          docker-compose run web flake8 .
+
+      - name: Check files using the black formatter
+        uses: rickstaa/action-black@v1
+        id: action_black
+        with:
+          black_args: ". --skip-string-normalization"
+
+      - name: Black Commit
+        if: steps.action_black.outputs.is_formatted == 'true'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: ":art: Format Python code with psf/black"
