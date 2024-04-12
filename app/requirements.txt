@@ -76,3 +76,7 @@ flake8-multiline-containers==0.0.19
 flake8-pie==0.16.0 
 pep8-naming==0.13.3
 mixer==7.2.2
+mypy==1.8.0
+djangorestframework-stubs==3.14.4
+django-stubs==4.2.6
+black==24.2.0
