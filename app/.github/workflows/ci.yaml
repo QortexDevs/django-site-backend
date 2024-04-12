@@ -35,7 +35,11 @@ jobs:
 
       - name: Pytest
         run: |
-          docker compose run web pytest -s -n auto
+          docker compose run web pytest
+
+      - name: Flake8
+        run: |
+          docker compose run web flake8 .
 
       - name: Black Formatter
         uses: psf/black@stable
