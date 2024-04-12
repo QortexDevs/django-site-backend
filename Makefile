@@ -1,4 +1,3 @@
-
 lint:
 	docker compose run --rm web sh -c "mypy . ; flake8 ."
 test:
