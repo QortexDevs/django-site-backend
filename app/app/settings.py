@@ -8,7 +8,7 @@ from datetime import timedelta
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env(
-    DEBUG=(bool, False)
+    DEBUG=(bool, False),
 )
 environ.Env.read_env()
 
@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'django_spaghetti',
     'simple_history',
     'nested_admin',
-
     'users',
 ]
 
@@ -73,7 +72,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
-    'default': env.db()
+    'default': env.db(),
 }
 
 AUTH_USER_MODEL = 'users.User'
@@ -117,9 +116,7 @@ CORS_ALLOW_CREDENTIALS = True
 
 REST_FRAMEWORK = {
     'COERCE_DECIMAL_TO_STRING': False,
-    'DEFAULT_FILTER_BACKENDS': (
-        'django_filters.rest_framework.DjangoFilterBackend',
-    ),
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ),
@@ -127,7 +124,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     ),
-    'ORDERING_PARAM': 'sort_by'
+    'ORDERING_PARAM': 'sort_by',
 }
 
 JWT_AUTH = {
@@ -141,9 +138,9 @@ SWAGGER_SETTINGS = {
         'Bearer': {
             'type': 'apiKey',
             'name': 'Authorization',
-            'in': 'header'
-        }
-    }
+            'in': 'header',
+        },
+    },
 }
 
 USE_X_FORWARDED_HOST = True
@@ -153,14 +150,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 PARLER_LANGUAGES = {
     None: (
-        {'code': 'en-us', },
-        {'code': 'ru-ru', },
+        {'code': 'en-us'},
+        {'code': 'ru-ru'},
     ),
     'default': {
-        'fallback': 'en-us',             # defaults to PARLER_DEFAULT_LANGUAGE_CODE
+        'fallback': 'en-us',  # defaults to PARLER_DEFAULT_LANGUAGE_CODE
         # the default; let .active_translations() return fallbacks too.
         'hide_untranslated': False,
-    }
+    },
 }
 PARLER_ENABLE_CACHING = False
 

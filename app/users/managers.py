@@ -17,7 +17,12 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_user(self, email: str, password: str | None = None, **extra_fields) -> User:
+    def create_user(
+        self,
+        email: str,
+        password: str | None = None,
+        **extra_fields,
+    ) -> User:
         """Create and save a regular User with the given email and password."""
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_superuser', False)
