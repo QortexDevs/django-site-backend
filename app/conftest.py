@@ -7,7 +7,9 @@ from rest_framework.test import APIClient
 def create_new_user():
     user = get_user_model()
     user_created = user.objects.create_user(
-        email='email@mail.com', password='password')
+        email='email@mail.com',
+        password='password',
+    )
     return user_created
 
 
