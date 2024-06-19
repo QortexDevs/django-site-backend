@@ -1,7 +1,7 @@
 asgiref==3.8.1
-astroid==3.2.2
+astroid==2.15.8
 attrs==23.2.0
-autopep8==2.3.0
+autopep8==2.2.0
 beautifulsoup4==4.12.3
 black==24.4.2
 bleach==6.1.0
@@ -24,7 +24,7 @@ drf-jwt==1.19.2
 drf-nested-routers==0.94.1
 drf-writable-nested==0.7.0
 drf-yasg==1.21.7
-flake8==7.1.0
+flake8==6.1.0
 flake8-bugbear==24.4.26
 flake8-cognitive-complexity==0.1.0
 flake8-django==1.4
@@ -57,11 +57,11 @@ pluggy==1.5.0
 psycopg2==2.9.9
 pur==7.3.2
 py==1.11.0
-pycodestyle==2.12.0
+pycodestyle==2.11.0
 pygsheets==2.0.6
-pylint==3.2.3
+pylint==2.17.7
 pyparsing==3.1.2
-pytest==8.2.2
+pytest==7.4.4
 pytest-django==4.8.0
 pytest-drf==1.1.3
 pytest-mock==3.14.0
