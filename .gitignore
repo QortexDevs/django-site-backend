@@ -141,3 +141,4 @@ cython_debug/
 
 *.gltf
 app/staticfiles/
+poetry.lock
