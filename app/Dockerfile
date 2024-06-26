@@ -4,7 +4,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y wget
 
 WORKDIR /
 ENV PYTHONUNBUFFERED=1
-COPY pyproject.toml poetry.lock /code/
+COPY pyproject.toml /code/
 
 WORKDIR /code
 
