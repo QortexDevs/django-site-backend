@@ -10,6 +10,7 @@ services:
 
   web:
     build: ./app
+    container_name: web
     environment:
       - DEBUG=True
       - ALLOWED_HOSTS=*
