@@ -88,6 +88,7 @@ webencodings = "0.5.1"
 whitenoise = "6.6.0"
 wrapt = "1.16.0"
 xlrd = "2.0.1"
+yamllint = "^1.37.1"
 
 
 [build-system]
@@ -126,7 +127,7 @@ exclude = [
     "migrations"
 ]
 
-target-version = "py311"
+target-version = "py312"
 
 line-length = 120
 
