@@ -1,16 +1,28 @@
-FROM python:3.12.4
+FROM python:3.12.6
 
-RUN apt-get update && apt-get upgrade -y && apt-get install -y wget
+ENV PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=off
 
-WORKDIR /
-ENV PYTHONUNBUFFERED=1
-COPY pyproject.toml /code/
+ENV POETRY_NO_INTERACTION=1 \
+    POETRY_VIRTUALENVS_CREATE=false \
+    POETRY_CACHE_DIR='/var/cache/pypoetry'
 
-WORKDIR /code
+RUN apt-get update && apt-get upgrade -y && apt-get install -y \
+    wget \
+    gcc \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN pip install poetry
-RUN poetry install
+RUN pip install --upgrade pip && pip install poetry==1.8.3
+
+WORKDIR /code/
+
+COPY pyproject.toml .
+
+RUN poetry lock --no-update && \
+    poetry config virtualenvs.create false && \
+    poetry install --no-root
 
 COPY . /code/
 
-CMD ["gunicorn", "-b", "0.0.0.0:8000", "app:app"]
+CMD ["poetry", "run", "gunicorn", "-b", "0.0.0.0:8000", "app.wsgi:application"]
