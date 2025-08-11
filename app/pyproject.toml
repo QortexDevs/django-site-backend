@@ -240,3 +240,10 @@ inline-quotes = "single"
 "*/tests/*" = [
     "ANN",  # flake8-annotations
 ]
+"manage.py" = [
+    "ANN201", # Missing return type annotation for public function `main`
+    "PLC0415", # `import` should be at the top-level of a file
+]
+"conftest.py" = [
+    "ANN", # flake8-annotations
+]

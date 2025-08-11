@@ -10,9 +10,9 @@ class User(AbstractUser):
     email = models.EmailField(_('email address'), unique=True)
     patronymic = models.CharField(_('patronymic'), max_length=150, blank=True)
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS: list[str] = []
 
     objects = UserManager()
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.email
