@@ -1,9 +1,10 @@
-import django_stubs_ext
 import os
-import environ
-from pathlib import Path
-from django.utils.translation import gettext_lazy as _
 from datetime import timedelta
+from pathlib import Path
+
+import django_stubs_ext
+import environ
+from django.utils.translation import gettext_lazy as _
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
