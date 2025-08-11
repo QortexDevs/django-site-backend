@@ -1,4 +1,5 @@
 import os
+import warnings
 from datetime import timedelta
 from pathlib import Path
 
@@ -6,6 +7,7 @@ import django_stubs_ext
 import environ
 from django.utils.translation import gettext_lazy as _
 
+warnings.filterwarnings('ignore', message='pkg_resources is deprecated')
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env(
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     'django_spaghetti',
     'simple_history',
     'nested_admin',
+    # apps
     'users',
 ]
 
@@ -102,8 +105,6 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-# USE_L10N = True
-
 USE_TZ = True
 
 STATIC_URL = '/static/'
@@ -118,9 +119,7 @@ CORS_ALLOW_CREDENTIALS = True
 REST_FRAMEWORK = {
     'COERCE_DECIMAL_TO_STRING': False,
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-    ),
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticatedOrReadOnly',),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',

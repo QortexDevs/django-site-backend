@@ -71,6 +71,7 @@ wrapt = "1.16.0"
 xlrd = "2.0.1"
 yamllint = "^1.37.1"
 ruff = "^0.12.8"
+setuptools = "^80.9.0"
 
 
 [build-system]
@@ -238,4 +239,11 @@ inline-quotes = "single"
 ]
 "*/tests/*" = [
     "ANN",  # flake8-annotations
+]
+"manage.py" = [
+    "ANN201", # Missing return type annotation for public function `main`
+    "PLC0415", # `import` should be at the top-level of a file
+]
+"conftest.py" = [
+    "ANN", # flake8-annotations
 ]
