@@ -1,0 +1,34 @@
+name: test
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build the image
+        run: docker compose build
+
+      - name: Run Docker Compose
+        run: |
+          docker compose up -d
+
+      - name: Containers List
+        run: docker ps
+
+      - name: Pytest
+        run: |
+          docker compose run web poetry run pytest
