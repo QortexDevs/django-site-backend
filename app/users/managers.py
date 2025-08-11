@@ -3,7 +3,7 @@ from typing import Any
 from django.contrib.auth.models import BaseUserManager, User
 
 
-class UserManager(BaseUserManager):
+class UserManager(BaseUserManager[User]):
     """Define a model manager for User model with no username field."""
 
     use_in_migrations = True

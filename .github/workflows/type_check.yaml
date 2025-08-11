@@ -1,0 +1,29 @@
+name: type-check
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build the image
+        run: docker compose build
+
+      - name: Run services
+        run: |
+          docker compose up -d
+
+      - name: Run Mypy
+        run: |
+          docker exec -t web mypy .

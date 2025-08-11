@@ -72,6 +72,9 @@ xlrd = "2.0.1"
 yamllint = "^1.37.1"
 ruff = "^0.12.8"
 setuptools = "^80.9.0"
+coverage = "^7.10.3"
+django-coverage-plugin = "^3.1.1"
+covdefaults = "^2.3.0"
 
 
 [build-system]
@@ -247,3 +250,82 @@ inline-quotes = "single"
 "conftest.py" = [
     "ANN", # flake8-annotations
 ]
+
+[tool.coverage.run]
+# Coverage configuration:
+# https://coverage.readthedocs.io/en/latest/config.html
+plugins = [
+    # Docs: https://github.com/nedbat/django_coverage_plugin
+    "django_coverage_plugin",
+    # Docs: https://pypi.org/project/covdefaults
+    "covdefaults",
+]
+
+omit = [
+    "*/tests/*",
+    "*/test_*.py",
+    "*_test.py",
+    "tests.py",
+    "*/management/*",
+]
+
+[tool.isort]
+profile = "django"
+combine_as_imports = true
+include_trailing_comma = true
+line_length = 120
+
+[tool.mypy]
+python_version = "3.12" 
+
+allow_redefinition = false
+check_untyped_defs = true
+disallow_untyped_decorators = true
+disallow_any_explicit = false
+disallow_any_generics = true
+disallow_untyped_calls = true
+disallow_incomplete_defs = true
+explicit_package_bases = true
+ignore_errors = false
+ignore_missing_imports = true
+implicit_reexport = false
+local_partial_types = true
+strict_optional = true
+strict_equality = true
+no_implicit_optional = true
+
+# warnings
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unused_configs = true
+warn_unreachable = true
+warn_no_return = true
+
+# imports
+follow_imports = "silent"
+
+plugins = [
+    "mypy_django_plugin.main",
+]
+
+[tool.django-stubs]
+django_settings_module = "app.settings"
+
+[[tool.mypy.overrides]]
+module = ["*.migrations.*"]
+ignore_errors = true
+
+[[tool.mypy.overrides]]
+module = ["*.tests.*"]
+ignore_errors = true
+
+[[tool.mypy.overrides]]
+# ignore missing imports for untyped modules
+module = [
+    "environ.*", 
+]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["manage"]
+ignore_errors = true
